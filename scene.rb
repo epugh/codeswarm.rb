@@ -3,8 +3,9 @@ require 'cairo'
 class Scene
 
   def initialize(width, height)
+    Dir.mkdir("frames")
     @surface = Cairo::ImageSurface.new(Cairo::Format::RGB24, width, height)
-    @out_file = File.new($output, "w")
+    #@out_file = File.new($output, "w")
     @cr = Cairo::Context.new(@surface)
     @cr2 = Cairo::Context.new(@surface)
     @count = 0
@@ -160,9 +161,10 @@ class Scene
     end
 
     # finalize
-    puts "count: #{@count += 1}"
-    # @cr.target.write_to_png("frames/%0.5i.png" % [@count += 1])
-    @out_file.write(@surface.data)
+    @count += 1
+    puts "count: #{@count}"
+    @cr.target.write_to_png("frames/%0.5i.png" % [@count])
+    #@out_file.write(@surface.data)
   end
 
   def cleanup
