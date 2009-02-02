@@ -30,4 +30,7 @@ Then launch codeswarm.rb:
 If you want to include audio add this:
  -audioclip foobar.mp3
 
+Alternatively, you can generate a video by merging the images into a vido:
+ ffmpeg -f image2 -r 24 -i ./frames/%05d.png -acodec copy -sameq ./linux.avi -pass 2
+
 That's it!
